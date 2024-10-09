@@ -8,9 +8,7 @@ $loader->register();
 
 $loader->addNamespace('\Helpers', '/Helpers');
 $loader->addNamespace('\League\Plates', 'Vendor/Plates/src');
+$loader->addNamespace('\Controllers', '/Controllers');
 
-// Instanciation de l'Engine avec le dossier des vues
-$templates = new \League\Plates\Engine('Views');
-
-// Appel de la fonction render() et affichage du résultat
-echo $templates->render('home', ['tftSetName' => 'Bonjour']);
+$controller = new \Controllers\MainController();
+$controller->index();
