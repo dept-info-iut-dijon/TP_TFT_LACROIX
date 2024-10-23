@@ -1,6 +1,8 @@
 <?php
 
 namespace Controllers;
+use Models\UnitDAO;
+
 
 class MainController
 {
@@ -14,7 +16,19 @@ class MainController
         $this->templates = new \League\Plates\Engine('Views');
     }
 
-    public function index() : void {
-        echo $this->templates->render('home', ['tftSetName' => 'Remix Rumble']);
+    public function index(): void
+    {
+        $unitDAO = new UnitDAO();
+
+        $listUnit = $unitDAO->getAll();
+        $first = $unitDAO->getByID('1');
+        $other = $unitDAO->getByID('non_existing_id');
+
+        echo $this->templates->render('home', [
+            'tftSetName' => 'Remix Rumble',
+            'listUnit' => $listUnit,
+            'first' => $first,
+            'other' => $other
+        ]);
     }
 }
