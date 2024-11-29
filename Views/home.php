@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/public/css/main.css">
 </head>
 <body>
+<?php include 'menu.php'; ?>
 <div class="container">
     <?php foreach ($listUnit as $unit): ?>
         <div class="unit-card">
@@ -16,8 +17,8 @@
                 <p>Cost: <?php echo htmlspecialchars($unit->getCost()); ?></p>
                 <p>Origin: <?php echo htmlspecialchars($unit->getOrigin()); ?></p>
                 <div class="options">
-                    <a href="edit.php?id=<?php echo htmlspecialchars($unit->getId()); ?>" class="btn btn-edit">Edit</a>
-                    <a href="delete.php?id=<?php echo htmlspecialchars($unit->getId()); ?>" class="btn btn-delete">Delete</a>
+                    <a href="index.php?action=edit-unit&id=<?php echo htmlspecialchars($unit->getId()); ?>" class="btn btn-edit">Edit</a>
+                    <a href="index.php?action=del-unit&id=<?php echo htmlspecialchars($unit->getId()); ?>" class="btn btn-delete">Delete</a>
                 </div>
             </div>
         </div>
