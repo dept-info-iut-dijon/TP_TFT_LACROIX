@@ -15,13 +15,17 @@ class Router {
 
     public function createControllerList() {
         $this->ctrlList = [
-            'main' => new \Controllers\MainController()
+            'main' => new \Controllers\MainController(),
+            'unit' => new \Controllers\UnitController()
         ];
     }
 
     public function createRouteList() {
         $this->routeList = [
-            'index' => new \Controllers\Router\Route\RouteIndex($this->ctrlList['main'])
+            'index' => new \Controllers\Router\Route\RouteIndex($this->ctrlList['main']),
+            'add-unit' => new \Controllers\Router\Route\RouteAddUnit($this->ctrlList['unit']),
+            'search' => new \Controllers\Router\Route\RouteSearch($this->ctrlList['main']),
+            'add-unit-origin' => new \Controllers\Router\Route\RouteAddOrigin($this->ctrlList['unit'])
         ];
     }
 

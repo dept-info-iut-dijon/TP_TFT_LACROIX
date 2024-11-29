@@ -4,7 +4,7 @@ namespace Controllers\Router\Route;
 
 use Controllers\Router\Route;
 
-class RouteIndex extends Route {
+class RouteSearch extends Route {
     private $controller;
 
     public function __construct($controller, $params = [], $method = 'GET') {
@@ -13,10 +13,10 @@ class RouteIndex extends Route {
     }
 
     public function get($params = []) {
-        $this->controller->index($params);
+        $this->controller->search($params);
     }
 
     public function post($params = []) {
-        $this->controller->index($params);
+        $this->controller->search($params);
     }
 }

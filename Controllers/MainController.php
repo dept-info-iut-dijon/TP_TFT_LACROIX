@@ -31,4 +31,8 @@ class MainController
             'other' => $other
         ]);
     }
+    public function search($params = []) {
+        $templates = new \League\Plates\Engine('Views');
+        echo $templates->render('search');
+    }
 }
