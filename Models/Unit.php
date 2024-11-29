@@ -62,4 +62,8 @@ class Unit
         $this->url_img = $url_img;
     }
 
+    public static function getProperties(): array
+    {
+        return ['name', 'cost', 'origin', 'url_img'];
+    }
 }
