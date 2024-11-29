@@ -15,12 +15,18 @@ class UnitController {
         try {
             $data['id'] = uniqid();
 
-            $unit = new Unit($data);
+            $unit = new Unit();
+            $unit->setId($data['id']);
+            $unit->setName($data['name']);
+            $unit->setCost($data['cost']);
+            $unit->setOrigin($data['origin']);
+            $unit->setUrlImg($data['url_img']);
 
             $unitDAO = new UnitDAO();
             $unitDAO->createUnit($unit);
 
-            $this->displayIndex("Unit added successfully.");
+            header('Location: /');
+            exit();
         } catch (\Exception $e) {
             $this->displayAddUnit($e->getMessage());
         }
@@ -32,7 +38,6 @@ class UnitController {
     }
 
     public function deleteUnit($params = []) {
-        // Logique de suppression de l'unité
         $message = "Unit deleted successfully.";
         $templates = new \League\Plates\Engine('Views');
         echo $templates->render('index', ['message' => $message]);

@@ -7,7 +7,7 @@ use PDO;
 class UnitDAO extends BasePDODAO
 {
     public function createUnit(Unit $unit) {
-        $sql = "INSERT INTO units (id, name, cost, origin, url_img) VALUES (:id, :name, :cost, :origin, :url_img)";
+        $sql = "INSERT INTO UNIT (id, name, cost, origin, url_img) VALUES (:id, :name, :cost, :origin, :url_img)";
         $params = [
             ':id' => $unit->getId(),
             ':name' => $unit->getName(),
