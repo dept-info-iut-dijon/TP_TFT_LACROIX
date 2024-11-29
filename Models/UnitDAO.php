@@ -6,6 +6,18 @@ use PDO;
 
 class UnitDAO extends BasePDODAO
 {
+    public function createUnit(Unit $unit) {
+        $sql = "INSERT INTO units (id, name, cost, origin, url_img) VALUES (:id, :name, :cost, :origin, :url_img)";
+        $params = [
+            ':id' => $unit->getId(),
+            ':name' => $unit->getName(),
+            ':cost' => $unit->getCost(),
+            ':origin' => $unit->getOrigin(),
+            ':url_img' => $unit->getUrlImg()
+        ];
+        $this->execRequest($sql, $params);
+    }
+
     public function getAll(): array
     {
         $sql = 'SELECT * FROM UNIT';

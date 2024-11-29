@@ -15,7 +15,12 @@
 </div>
 <div class="container">
     <h1>Add Unit</h1>
-    <form action="" method="post">
+    <?php if (isset($message) && $message): ?>
+    <div class="error-message">
+        <?= htmlspecialchars($message) ?>
+    </div>
+    <?php endif; ?>
+    <form action="index.php?action=add-unit" method="post">
         <label for="unitName">Unit Name:</label>
         <input type="text" id="unitName" name="unitName" required>
 

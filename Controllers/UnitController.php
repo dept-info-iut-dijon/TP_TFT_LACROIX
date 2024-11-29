@@ -2,10 +2,28 @@
 
 namespace Controllers;
 
+use Models\Unit;
+use Models\UnitDAO;
+
 class UnitController {
-    public function displayAddUnit() {
+    public function displayAddUnit(?string $message = null) {
         $templates = new \League\Plates\Engine('Views');
-        echo $templates->render('add-unit');
+        echo $templates->render('add-unit', ['message' => $message]);
+    }
+
+    public function addUnit(array $data) {
+        try {
+            $data['id'] = uniqid();
+
+            $unit = new Unit($data);
+
+            $unitDAO = new UnitDAO();
+            $unitDAO->createUnit($unit);
+
+            $this->displayIndex("Unit added successfully.");
+        } catch (\Exception $e) {
+            $this->displayAddUnit($e->getMessage());
+        }
     }
 
     public function displayAddOrigin() {
