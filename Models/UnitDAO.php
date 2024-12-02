@@ -27,6 +27,18 @@ class UnitDAO extends BasePDODAO
         $this->execRequest($sql, $params);
     }
 
+    public function updateUnit(Unit $unit) {
+        $sql = "UPDATE UNIT SET name = :name, cost = :cost, origin = :origin, url_img = :url_img WHERE id = :id";
+        $params = [
+            ':id' => $unit->getId(),
+            ':name' => $unit->getName(),
+            ':cost' => $unit->getCost(),
+            ':origin' => $unit->getOrigin(),
+            ':url_img' => $unit->getUrlImg()
+        ];
+        $this->execRequest($sql, $params);
+    }
+
     public function getAll(): array
     {
         $sql = 'SELECT * FROM UNIT';

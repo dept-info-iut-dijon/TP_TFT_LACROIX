@@ -6,6 +6,12 @@ use Models\Unit;
 use Models\UnitDAO;
 
 class UnitController {
+    private $mainController;
+
+    public function __construct() {
+        $this->mainController = new MainController();
+    }
+
     public function displayAddUnit(?string $message = null) {
         $templates = new \League\Plates\Engine('Views');
         echo $templates->render('add-unit', ['message' => $message]);
@@ -37,9 +43,28 @@ class UnitController {
         echo $templates->render('add-origin');
     }
 
-    public function updateUnit($params = []) {
-        $templates = new \League\Plates\Engine('Views');
-        echo $templates->render('add-unit', ['id' => $params['id']]);
+    public function editUnitAndIndex(array $dataUnit) {
+        try {
+            $unit = new Unit();
+            $unit->setId($dataUnit['id']);
+            $unit->setName($dataUnit['unitName']);
+            $unit->setCost($dataUnit['unitCost']);
+            $unit->setOrigin($dataUnit['unitOrigin']);
+            $unit->setUrlImg($dataUnit['unitUrlImg']);
+
+            $unitDAO = new UnitDAO();
+            if ($unitDAO->getByID($dataUnit['id'])) {
+                $unitDAO->updateUnit($unit);
+                $message = "Unit updated successfully.";
+            } else {
+                $unitDAO->createUnit($unit);
+                $message = "Unit added successfully.";
+            }
+
+            $this->mainController->index($message);
+        } catch (\Exception $e) {
+            $this->displayAddUnit($e->getMessage());
+        }
     }
 
     public function deleteUnitAndIndex(string $idUnit) {

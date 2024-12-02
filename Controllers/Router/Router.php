@@ -27,7 +27,7 @@ class Router {
             'search' => new \Controllers\Router\Route\RouteSearch($this->ctrlList['main']),
             'add-unit-origin' => new \Controllers\Router\Route\RouteAddOrigin($this->ctrlList['unit']),
             'del-unit' => new \Controllers\Router\Route\RouteDeleteUnit($this->ctrlList['unit']),
-            'update-unit' => new \Controllers\Router\Route\RouteUpdateUnit($this->ctrlList['unit'])
+            'edit-unit' => new \Controllers\Router\Route\RouteUpdateUnit($this->ctrlList['unit'])
         ];
     }
 
