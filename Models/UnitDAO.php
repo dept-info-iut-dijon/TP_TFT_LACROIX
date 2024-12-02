@@ -18,6 +18,15 @@ class UnitDAO extends BasePDODAO
         $this->execRequest($sql, $params);
     }
 
+    public function deleteUnit(string $idUnit = "-1") {
+        if ($idUnit === "-1") {
+            throw new \InvalidArgumentException("Invalid unit ID");
+        }
+        $sql = 'DELETE FROM UNIT WHERE id = :id';
+        $params = ['id' => $idUnit];
+        $this->execRequest($sql, $params);
+    }
+
     public function getAll(): array
     {
         $sql = 'SELECT * FROM UNIT';

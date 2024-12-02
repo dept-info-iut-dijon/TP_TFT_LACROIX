@@ -13,7 +13,12 @@ class RouteDeleteUnit extends Route {
     }
 
     public function get($params = []) {
-        $this->controller->deleteUnit($params);
+        if (isset($params['id'])) {
+            $idUnit = $params['id'];
+            $this->controller->deleteUnitAndIndex($idUnit);
+        } else {
+            $this->controller->deleteUnitAndIndex(-1);
+        }
     }
 
     public function post($params = []) {

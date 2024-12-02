@@ -25,7 +25,7 @@ class UnitController {
             $unitDAO = new UnitDAO();
             $unitDAO->createUnit($unit);
 
-            header('Location: /');
+            header('Location: index.php?action=index');
             exit();
         } catch (\Exception $e) {
             $this->displayAddUnit($e->getMessage());
@@ -37,14 +37,26 @@ class UnitController {
         echo $templates->render('add-origin');
     }
 
-    public function deleteUnit($params = []) {
-        $message = "Unit deleted successfully.";
-        $templates = new \League\Plates\Engine('Views');
-        echo $templates->render('index', ['message' => $message]);
-    }
-
     public function updateUnit($params = []) {
         $templates = new \League\Plates\Engine('Views');
         echo $templates->render('add-unit', ['id' => $params['id']]);
+    }
+
+    public function deleteUnitAndIndex(string $idUnit) {
+        $unitDAO = new UnitDAO();
+        try {
+            $unitDAO->deleteUnit($idUnit);
+            $message = "Unit deleted successfully.";
+        } catch (\Exception $e) {
+            $message = "Failed to delete unit: " . $e->getMessage();
+        }
+        $this->displayIndex($message);
+    }
+
+    public function displayIndex(?string $message = null) {
+        $unitDAO = new UnitDAO();
+        $listUnit = $unitDAO->getAll();
+        $templates = new \League\Plates\Engine('Views');
+        echo $templates->render('home', ['listUnit' => $listUnit, 'message' => $message]);
     }
 }
