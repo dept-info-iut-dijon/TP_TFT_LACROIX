@@ -2,6 +2,8 @@
 
 namespace Controllers;
 
+use Models\Origin;
+use Models\OriginDAO;
 use Models\Unit;
 use Models\UnitDAO;
 
@@ -36,11 +38,6 @@ class UnitController {
         } catch (\Exception $e) {
             $this->displayAddUnit($e->getMessage());
         }
-    }
-
-    public function displayAddOrigin() {
-        $templates = new \League\Plates\Engine('Views');
-        echo $templates->render('add-origin');
     }
 
     public function editUnitAndIndex(array $dataUnit) {
@@ -83,5 +80,22 @@ class UnitController {
         $listUnit = $unitDAO->getAll();
         $templates = new \League\Plates\Engine('Views');
         echo $templates->render('home', ['listUnit' => $listUnit, 'message' => $message]);
+    }
+
+    public function displayAddOrigin(?string $message = null) {
+        $templates = new \League\Plates\Engine('Views');
+        echo $templates->render('add-origin', ['message' => $message]);
+    }
+
+    public function createOriginAndIndex(array $data) {
+        try {
+            $origin = new Origin($data);
+            $originDAO = new OriginDAO();
+            $originDAO->create($origin);
+            $message = "Origin added successfully.";
+            $this->mainController->index($message);
+        } catch (\Exception $e) {
+            $this->displayAddOrigin($e->getMessage());
+        }
     }
 }

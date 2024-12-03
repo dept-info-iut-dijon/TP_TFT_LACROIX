@@ -14,13 +14,19 @@
     <a class="menu-link" href="?action=add-unit-origin">Add Unit Origin</a>
 </div>
 <div class="container">
-    <h1>Add Origin</h1>
-    <form action="" method="post">
-        <label for="originName">Origin Name:</label>
-        <input type="text" id="originName" name="originName" required>
 
-        <label for="originUrlImg">Origin Image URL:</label>
-        <input type="text" id="originUrlImg" name="originUrlImg" required>
+    <h1>Add Origin</h1>
+
+    <?php if (isset($message)): ?>
+        <p><?= htmlspecialchars($message) ?></p>
+    <?php endif; ?>
+
+    <form action="index.php?action=add-unit-origin" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="url_img">Image URL:</label>
+        <input type="url" id="url_img" name="url_img" required>
 
         <button type="submit">Add Origin</button>
     </form>
